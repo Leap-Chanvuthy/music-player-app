@@ -1,6 +1,9 @@
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from '../redux/store';
 import './globals.css';
 
 export default function RootLayout() {
@@ -22,5 +25,11 @@ export default function RootLayout() {
   if (!fontsLoaded){
     return null;
   }
-  return <Stack screenOptions={{headerShown : false}} />;
+  return (
+      <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+          <Stack screenOptions={{headerShown : false}} />
+      </PersistGate>
+    </Provider>
+  )
 }
