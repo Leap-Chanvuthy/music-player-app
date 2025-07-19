@@ -6,15 +6,19 @@ import { persistReducer } from 'redux-persist';
 import authReducer from './slices/authSlice';
 import counterReducer from './slices/counterSlice';
 
-// Config: only persist auth
 const authPersistConfig = {
   key: 'auth',
   storage: AsyncStorage,
 };
 
+const playerPersistConfig = {
+  key: 'player',
+  storage: AsyncStorage,
+};
+
 const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer), // persisted
-  counter: counterReducer, // not persisted
+  auth: persistReducer(authPersistConfig, authReducer),
+  counter: counterReducer,
 });
 
 export default rootReducer;
